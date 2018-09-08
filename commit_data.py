@@ -39,7 +39,7 @@ def process_decoded(dec_dir, store_dir):
 
 
 if __name__ == '__main__':
-    dec_dir = './log/bytecup/decode_test_200maxenc_4beam_35mindec_100maxdec_ckpt-176678/decoded/'
+    dec_dir = './log/bytecup/decode_test_300maxenc_4beam_4mindec_30maxdec_ckpt-390702/decoded/'
     store_dir = './log/bytecup/result/'
     if not os.path.exists(store_dir):
         os.mkdir(store_dir)
