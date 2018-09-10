@@ -28,8 +28,8 @@ finished_files_dir = "./data/tokenized/finished_files"
 chunks_dir = os.path.join(finished_files_dir, "chunked")
 
 # These are the number of .story files we expect there to be in cnn_stories_dir and dm_stories_dir
-num_expected_train_stories = 1243739
-num_expected_valid_stories = 18000
+num_expected_train_stories = 1260839
+num_expected_valid_stories = 900
 num_expected_test_stories = 1000
 
 VOCAB_SIZE = 200000
@@ -89,7 +89,8 @@ def tokenize_stories(stories_dir, tokenized_stories_dir):
     num_tokenized = len(os.listdir(tokenized_stories_dir))
     if num_orig != num_tokenized:
         raise Exception(
-            "The tokenized stories directory %s contains %i files, but it should contain the same number as %s (which has %i files). Was there an error during tokenization?" % (
+            "The tokenized stories directory %s contains %i files, but it should contain the same number as %s \
+            (which has %i files). Was there an error during tokenization?" % (
             tokenized_stories_dir, num_tokenized, stories_dir, num_orig))
     print("Successfully finished tokenizing %s to %s.\n" % (stories_dir, tokenized_stories_dir))
 
@@ -128,7 +129,9 @@ def get_art_abs(story_file):
     # Lowercase everything
     lines = [line.lower() for line in lines]
 
-    # Put periods on the ends of lines that are missing them (this is a problem in the dataset because many image captions don't end in periods; consequently they end up in the body of the article as run-on sentences)
+    # Put periods on the ends of lines that are missing them
+    # (this is a problem in the dataset because many image captions don't end in periods;
+    # consequently they end up in the body of the article as run-on sentences)
     lines = [fix_missing_period(line) for line in lines]
 
     # Separate out article and abstract sentences
@@ -155,7 +158,9 @@ def get_art_abs(story_file):
 
 
 def write_to_bin(url_file, out_file, makevocab=False):
-    """Reads the tokenized .story files corresponding to the urls listed in the url_file and writes them to a out_file."""
+    """
+    Reads the tokenized .story files corresponding to the urls listed in the url_file and writes them to a out_file.
+    """
     print("Making bin file for URLs listed in %s..." % url_file)
     url_list = read_text_file(url_file)
     # url_hashes = get_url_hashes(url_list)
@@ -268,5 +273,6 @@ if __name__ == '__main__':
     write_to_bin(all_val_urls, os.path.join(finished_files_dir, "val.bin"))
     write_to_bin(all_train_urls, os.path.join(finished_files_dir, "train.bin"), makevocab=True)
 
-    # Chunk the data. This splits each of train.bin, val.bin and test.bin into smaller chunks, each containing e.g. 1000 examples, and saves them in finished_files/chunks
+    # Chunk the data. This splits each of train.bin, val.bin and test.bin into smaller chunks, each containing
+    # e.g. 1000 examples, and saves them in finished_files/chunks
     chunk_all()
