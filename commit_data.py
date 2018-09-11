@@ -1,10 +1,9 @@
 import os
-import util
-import tensorflow as tf
+import glob
 
 
+decode_dir = glob.glob("./log/bytecup/decode_test_*/decoded/")[0]
 result_dir = "./log/bytecup/result/"
-FLAGS = tf.app.flags.FLAGS
 
 
 def process_decoded(dec_dir, store_dir):
@@ -23,30 +22,8 @@ def process_decoded(dec_dir, store_dir):
                 fw.write('\n')
 
 
-def get_decode_dir_name(ckpt_name):
-    if "train" in FLAGS.data_path:
-        dataset = "train"
-    elif "val" in FLAGS.data_path:
-        dataset = "val"
-    elif "test" in FLAGS.data_path:
-        dataset = "test"
-    else:
-        raise ValueError("FLAGS.data_path %s should contain one of train, val or test" % (FLAGS.data_path))
-    dirname = "decode_%s_%imaxenc_%ibeam_%imindec_%imaxdec" % \
-              (dataset, FLAGS.max_enc_steps, FLAGS.beam_size, FLAGS.min_dec_steps, FLAGS.max_dec_steps)
-    if ckpt_name is not None:
-        dirname += "_%s" % ckpt_name
-    return dirname
-
-
 if __name__ == '__main__':
     if not os.path.exists(result_dir):
         os.mkdir(result_dir)
-
-    # Load an initial checkpoint to use for decoding
-    ckpt_path = util.load_ckpt(tf.train.Saver(), tf.Session(config=util.get_config()))
-    # this is something of the form "ckpt-123456"
-    ckpt_name = "ckpt-" + ckpt_path.split('-')[-1]
-    decode_dir = os.path.join(FLAGS.log_root, get_decode_dir_name(ckpt_name))
 
     process_decoded(decode_dir, result_dir)
