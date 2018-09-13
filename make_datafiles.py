@@ -17,10 +17,15 @@ END_TOKENS = ['.', '!', '?', '...', "'", "`", '"', dm_single_close_quote, dm_dou
 SENTENCE_START = '<s>'
 SENTENCE_END = '</s>'
 
+train_stories_dir = "./data/train"
+valid_stories_dir = "./data/valid"
+test_stories_dir = "./data/test"
+
 all_train_urls = "./data/lists/all_train.txt"
 all_val_urls = "./data/lists/all_valid.txt"
 all_test_urls = "./data/lists/all_test.txt"
 
+# These are generated dirs
 train_tokenized_stories_dir = "./data/tokenized/train_stories_tokenized"
 valid_tokenized_stories_dir = "./data/tokenized/valid_stories_tokenized"
 test_tokenized_stories_dir = "./data/tokenized/test_stories_tokenized"
@@ -28,7 +33,7 @@ finished_files_dir = "./data/tokenized/finished_files"
 chunks_dir = os.path.join(finished_files_dir, "chunked")
 
 # These are the number of .story files we expect there to be in cnn_stories_dir and dm_stories_dir
-num_expected_train_stories = 1260839
+num_expected_train_stories = 1260542
 num_expected_valid_stories = 900
 num_expected_test_stories = 1000
 
@@ -243,10 +248,6 @@ if __name__ == '__main__':
     #   sys.exit()
     # cnn_stories_dir = sys.argv[1]
     # dm_stories_dir = sys.argv[2]
-
-    train_stories_dir = './data/train'
-    valid_stories_dir = './data/valid'
-    test_stories_dir = './data/test'
 
     # Check the stories directories contain the correct number of .story files
     check_num_stories(train_stories_dir, num_expected_train_stories)

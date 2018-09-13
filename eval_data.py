@@ -1,6 +1,10 @@
 import os
-import json
 import numpy as np
+
+
+TRAIN_DIR = './data/train'
+VALID_DIR = './data/valid'
+TEST_DIR = './data/test'
 
 
 def detect_length(dir, mode='train'):
@@ -9,6 +13,7 @@ def detect_length(dir, mode='train'):
     idxs_file = []
     lens_article = []
     lens_abstract =[]
+
     files = os.listdir(dir)
     for file in files:
         f_path = os.path.join(dir, file)
@@ -45,13 +50,10 @@ def detect_length(dir, mode='train'):
             print("max file:{0}".format(idxs_file[int(idx)]))
         for idx in idx_min[0]:
             print("min file:{0}".format(idxs_file[int(idx)]))
+    return idxs_file, lens_article, lens_abstract
 
 
 if __name__ == '__main__':
-    TRAIN_DIR = './data/train'
-    VALID_DIR = './data/valid'
-    TEST_DIR = './data/test'
-
     detect_length(TEST_DIR, mode='test')
     print('\n')
     detect_length(TRAIN_DIR, mode='train')

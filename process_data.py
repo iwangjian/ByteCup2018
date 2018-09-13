@@ -4,6 +4,8 @@ Data preprocessing code on raw dataset.
 
 import os
 import json
+import numpy as np
+from eval_data import detect_length
 
 DATA_DIR = './data/bytecup2018'
 
@@ -112,6 +114,38 @@ def process_test(file):
             idx_obj.write(idx_ + '\n')
 
 
+def clean_train():
+    idxs_file, lens_article, lens_abstract = detect_length(TRAIN_DIR, mode='train')
+    del_idxs = []
+    if np.min(lens_article) <= 7:
+        idx_min = np.where(np.array(lens_article) <= 7)
+        article_min = [idxs_file[int(idx)] for idx in idx_min[0]]
+        for file in os.listdir(TRAIN_DIR):
+            if file in article_min:
+                del_idxs.append(file)
+                os.remove(os.path.join(TRAIN_DIR, file))
+    if np.min(lens_abstract) <= 2:
+        idx_min = np.where(np.array(lens_abstract) <= 2)
+        abstract_min = [idxs_file[int(idx)] for idx in idx_min[0]]
+        for file in os.listdir(TRAIN_DIR):
+            if file in abstract_min:
+                del_idxs.append(file)
+                os.remove(os.path.join(TRAIN_DIR, file))
+
+    # Update idxs of files
+    all_train_urls = "./data/lists/all_train.txt"
+    train_idxs = []
+    with open(all_train_urls, 'r', encoding='utf-8') as f_obj:
+        for line in f_obj.readlines():
+            if not line.strip() in del_idxs:
+                train_idxs.append(line.strip())
+            else:
+                print("delete %s" % line)
+    with open(all_train_urls, 'w', encoding='utf-8') as idx_obj:
+        for idx_ in train_idxs:
+            idx_obj.write(idx_ + '\n')
+
+
 if __name__ == '__main__':
     # Create data dirs if not exist
     DIRS = [LISTS_DIR, TRAIN_DIR, VALID_DIR, TEST_DIR]
@@ -132,3 +166,7 @@ if __name__ == '__main__':
             file_path = os.path.join(DATA_DIR, file)
             process_test(file_path)
             print("%s finished." % file)
+
+    # Clean the training set
+    print("cleaning train dataset...")
+    clean_train()
