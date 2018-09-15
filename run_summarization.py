@@ -29,8 +29,6 @@ from decode import BeamSearchDecoder
 import util
 from tensorflow.python import debug as tf_debug
 
-# Setting of GPUs
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -322,6 +320,7 @@ def main(unused_argv):
     decoder.decode() # decode indefinitely (unless single_pass=True, in which case deocde the dataset exactly once)
   else:
     raise ValueError("The 'mode' flag must be one of train/eval/decode")
+
 
 if __name__ == '__main__':
   tf.app.run()
