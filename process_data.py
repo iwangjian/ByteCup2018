@@ -51,8 +51,8 @@ def process_train_valid(file):
             file_obj.write('@highlight' + '\n')
             file_obj.write('\n')
             file_obj.write(train_titles[idx] + '\n')
-        #if int(idx) % 5000 == 0:
-        #    print('Writing the %d file.' % idx)
+        if int(idx) % 10000 == 0:
+            print('Writing the %d file.' % idx)
 
     # Write validation sets to files 'xxx.valid.story'
     for idx in range(len(valid_ids)):
@@ -83,35 +83,35 @@ def process_train_valid(file):
 
 
 def process_test(file):
-    ids = []
-    contents = []
-    test_text_idxs = []
+    articles = {}
+    test_text_idxs = {}
 
     with open(file, 'r', encoding='utf-8') as f_obj:
         texts = f_obj.readlines()
 
     for text in texts:
         text_dict = json.loads(text)
-        ids.append(int(text_dict['id']))
-        contents.append(text_dict['content'])
+        articles[text_dict['id']] = text_dict['content']
 
     # Write test sets to files 'xxx.test.story'
-    for idx in range(len(ids)):
-        test_text_idx = str(ids[idx]) + '.test.story'
-        test_text_idxs.append(test_text_idx)
-        file_test = TEST_DIR + '/' + str(ids[idx]) + '.test.story'
-
+    for id, content in articles.items():
+        test_text_idxs[int(id)] = str(id) + '.test.story'
+        file_test = TEST_DIR + '/' + str(id) + '.test.story'
         with open(file_test, 'w', encoding='utf-8') as file_obj:
-            file_obj.write(contents[idx] + '\n')
+            file_obj.write(content + '\n')
             file_obj.write('\n')
-           
-        #if int(idx) % 5000 == 0:
-        #    print('Writing the %d file.' % idx)
+        #if int(id) % 5000 == 0:
+        #    print('Writing the %d file.' % id)
     # Append indexes of test files
     test_file_idx = LISTS_DIR + '/all_test.txt'
     with open(test_file_idx, 'w', encoding='utf-8') as idx_obj:
-        for idx_ in test_text_idxs:
-            idx_obj.write(idx_ + '\n')
+        idxs = []
+        for _idx in test_text_idxs.keys():
+            idxs.append(_idx)
+        # To ensure test-set-idxs in order
+        idxs = np.sort(idxs)
+        for _idx in idxs:
+            idx_obj.write(test_text_idxs[_idx] + '\n')
 
 
 def clean_train():
@@ -160,7 +160,7 @@ if __name__ == '__main__':
             file_path = os.path.join(DATA_DIR, file)
             process_train_valid(file_path)
             print("%s finished." % file)
-        # Note: We temporarily use 'bytecup.corpus.validation_set' as test sets
+        # Note: We temporarily use 'bytecup.corpus.validation_set' as test set
         elif 'bytecup.corpus.validation_set' in str(file):
             print("Processing %s..." % file)
             file_path = os.path.join(DATA_DIR, file)
