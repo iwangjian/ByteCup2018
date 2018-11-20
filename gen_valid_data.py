@@ -120,11 +120,11 @@ def main():
 
     valid_ids = []
     for i in range(len(querys)):
+        print("query id:", querys_ids[i])
         query = querys[i]
         query = validate(query)
         results = queryer.run_query(query)
         ids = results["ids"]
-        print("query id:", querys_ids[i])
         print("results:", ids)
         for id in ids:
             valid_ids.append(id)
