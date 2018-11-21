@@ -1,6 +1,6 @@
 import os
 import json
-import numpy as np
+import re
 from retriever import Indexer, Queryer
 
 TRAIN_DIR = "./data_20181120"
@@ -76,23 +76,12 @@ def build_mapping(data_train, index_dir):
 
 
 def validate(query):
-    valid_query = query
-    if "*" in valid_query:
-        valid_query = valid_query.replace('*', '')
-    if "?" in valid_query:
-        valid_query = valid_query.replace('?', '')
-    if "!" in valid_query:
-        valid_query = valid_query.replace('!', '')
-    if ":" in valid_query:
-        valid_query = valid_query.replace(':', '')
-    if "[" in valid_query:
-        valid_query = valid_query.replace('[', '')
-    if "]" in valid_query:
-        valid_query = valid_query.replace(']', '')
-    if "(" in valid_query:
-        valid_query = valid_query.replace('(', '')
-    if ")" in valid_query:
-        valid_query = valid_query.replace(')', '')
+    query_words = query.split(" ")
+    valid_query = []
+    for w in query_words:
+        if re.match(r"[A-Za-z]", w):
+            valid_query.append(w)
+    valid_query = str(" ".join(valid_query))
     return valid_query
 
 
