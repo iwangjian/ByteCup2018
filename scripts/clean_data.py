@@ -16,7 +16,7 @@ def clean_data():
             title_set.add(title)
             title2file[title] = file
     print("len unique titles:", len(title_set))
-
+    print("copy files...")
     if not os.path.exists(CLEANED_TRAIN_DIR):
         os.mkdir(CLEANED_TRAIN_DIR)
     for t in title_set:

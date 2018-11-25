@@ -4,7 +4,7 @@ import re
 from summa import keywords
 from scripts.retriever import Indexer, Queryer
 
-TRAIN_DIR = "./data_20181120"
+TRAIN_DIR = "./data_20181124"
 TEST_DIR = "./test"
 INDEX_DIR = "./index"
 VALID_DIR = "./valid"
@@ -98,14 +98,14 @@ def main():
     if not os.path.exists(VALID_DIR):
         os.mkdir(VALID_DIR)
     # load train data
-    #data_train = load_train(TRAIN_DIR)
+    data_train = load_train(TRAIN_DIR)
 
     # build mappings for train data: <id, content>, <id, title>
-    #id2content, id2title = build_mapping(data_train, INDEX_DIR)
+    id2content, id2title = build_mapping(data_train, INDEX_DIR)
 
     # build indexes of train data
-    #indexer = Indexer(INDEX_DIR)
-    #indexer.build_index(id2content, id2title)
+    indexer = Indexer(INDEX_DIR)
+    indexer.build_index(id2content, id2title)
 
     # query top-k similar data of test set
     data_test = load_test(TEST_DIR)
@@ -133,6 +133,7 @@ def main():
             valid_ids.append(id)
 
     # copy/move retrieved files to valid set
+    print("copy files...")
     for id in valid_ids:
         cmd = "cp ./%s/%s.train.story ./%s/" % (TRAIN_DIR, id, VALID_DIR)
         os.system(cmd)
