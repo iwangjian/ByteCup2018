@@ -1,1 +1,0 @@
-python3 run_summarization.py --mode=train --data_path=./data/tokenized/finished_files/chunked/train_* --vocab_path=./data/tokenized/finished_files/vocab --log_root=./log --exp_name=bytecup

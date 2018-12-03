@@ -1,1 +1,0 @@
-python3 run_summarization.py --mode=decode --data_path=./data/tokenized/finished_files/chunked/val_* --vocab_path=./data/tokenized/finished_files/vocab --log_root=./log --exp_name=bytecup --single_pass=True
