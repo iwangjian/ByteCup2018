@@ -1,8 +1,12 @@
 ﻿# ByteCup2018
 
+<<<<<<< HEAD
 The topic of [Byte Cup 2018 International Machine Learning Contest](https://biendata.com/competition/bytecup2018/) is to  automatically generate titles of given articles. All data for training, validation and testing are from TopBuzz, a Bytedance's product, and other open sources.
 In this competition, we build a hybrid extractive-abstractive architecture with reinforcement learning (RL) based policy. The model first employs an extractor agent to select salient sentences or highlights, and then employs an abstractive network to rewrite the extracted sentences, using actor-critic policy gradient to learn the sentence saliency with dropout policy to avoid over-fitting.
 
+=======
+The final version will be released until the contest finished...
+>>>>>>> 0302f3a80c4a7d77a6b19cb7e54828b9c0c67ec2
 
 ## Dependencies
 * Python3 (tested on Python 3.6)
@@ -10,6 +14,7 @@ In this competition, we build a hybrid extractive-abstractive architecture with 
 * gensim
 * tensorboardX
 * cytoolz
+<<<<<<< HEAD
 * pyrouge
 
 ## Quick Start
@@ -24,3 +29,6 @@ Update later...
 [3] ["Regularizing and Optimizing LSTM Language Models"](https://arxiv.org/pdf/1708.02182.pdf) (arXiv 2017)
 
 [4] https://github.com/ChenRocks/fast_abs_rl
+=======
+* pyrouge
+>>>>>>> 0302f3a80c4a7d77a6b19cb7e54828b9c0c67ec2
