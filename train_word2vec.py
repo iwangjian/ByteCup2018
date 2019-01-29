@@ -53,7 +53,7 @@ if __name__ == '__main__':
     )
     parser.add_argument('--data', required=True, help='data directories')
     parser.add_argument('--path', required=True, help='root of the word2vec model')
-    parser.add_argument('--dim', action='store', type=int, default=128)
+    parser.add_argument('--dim', action='store', type=int, default=300)
     args = parser.parse_args()
 
     main(args)
