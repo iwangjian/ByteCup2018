@@ -173,7 +173,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--vsize', type=int, action='store', default=25000,
                         help='vocabulary size')
-    parser.add_argument('--emb_dim', type=int, action='store', default=128,
+    parser.add_argument('--emb_dim', type=int, action='store', default=300,
                         help='the dimension of word embedding')
     parser.add_argument('--w2v', action='store',
                         help='use pretrained word2vec embedding')

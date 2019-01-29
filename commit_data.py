@@ -32,7 +32,7 @@ if __name__ == '__main__':
     parser.add_argument('--decode_dir', action='store', required=True,
                         help='directory of decoded summaries')
     parser.add_argument('--result_dir', action='store', required=True,
-                        help='directory of commit summaries')
+                        help='directory of submission')
     args = parser.parse_args()
 
     process_decoded(args)
