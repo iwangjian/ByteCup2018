@@ -7,7 +7,7 @@ from time import time
 from datetime import timedelta
 from cytoolz import concatv
 import gensim
-from utils import count_data
+from utils.utils import count_data
 
 
 class Sentences(object):

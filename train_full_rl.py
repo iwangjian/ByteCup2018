@@ -18,12 +18,10 @@ from data.batcher import tokenize
 from model.rl import ActorCritic
 from model.extract import PtrExtractSumm
 
-from training import BasicTrainer
-from rl_utils import get_grad_fn
-from rl_utils import A2CPipeline
-from decoding import load_best_ckpt
-from decoding import Abstractor, ArticleBatcher
-from metric import compute_rouge_l, compute_rouge_n
+from utils.training import BasicTrainer
+from utils.rl_utils import get_grad_fn, A2CPipeline
+from utils.decoding import load_best_ckpt, Abstractor, ArticleBatcher
+from utils.metric import compute_rouge_l, compute_rouge_n
 
 MAX_ABS_LEN = 25
 

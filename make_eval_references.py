@@ -4,8 +4,8 @@ import os
 import argparse
 from time import time
 from datetime import timedelta
-from utils import count_data
-from decoding import make_html_safe
+from utils.utils import count_data
+from utils.decoding import make_html_safe
 
 
 def dump(data_dir, split):

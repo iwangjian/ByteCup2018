@@ -13,11 +13,11 @@ from torch.utils.data import DataLoader
 
 from model.extract import ExtractSumm, PtrExtractSumm
 from model.util import sequence_loss
-from training import get_basic_grad_fn, basic_validate
-from training import BasicPipeline, BasicTrainer
+from utils.training import get_basic_grad_fn, basic_validate
+from utils.training import BasicPipeline, BasicTrainer
 
-from utils import PAD, UNK
-from utils import make_vocab, make_embedding
+from utils.utils import PAD, UNK
+from utils.utils import make_vocab, make_embedding
 
 from data.data import CnnDmDataset
 from data.batcher import coll_fn_extract, prepro_fn_extract

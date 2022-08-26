@@ -16,8 +16,7 @@ from torch import multiprocessing as mp
 
 from data.batcher import tokenize
 from data.data import CnnDmDataset
-from decoding import Abstractor, RLExtractor, BeamAbstractor
-from decoding import make_html_safe
+from utils.decoding import Abstractor, RLExtractor, BeamAbstractor, make_html_safe
 
 
 class DecodeDataset(CnnDmDataset):

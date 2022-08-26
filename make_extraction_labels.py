@@ -6,8 +6,8 @@ from time import time
 from datetime import timedelta
 import multiprocessing as mp
 from cytoolz import curry, compose
-from utils import count_data
-from metric import compute_rouge_l
+from utils.utils import count_data
+from utils.metric import compute_rouge_l
 
 
 def _split_words(texts):
